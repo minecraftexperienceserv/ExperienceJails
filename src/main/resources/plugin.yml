@@ -1,6 +1,6 @@
 name: ExperienceJails
 version: '${project.version}'
-main: it.minecraftexperience.ExperienceJails
+main: it.minecraftexperience.experiencejails.Main
 api-version: 1.17
 authors: [ tommasobenatti, IllegalNatrium ]
 description: A simple plugin for Jails, made for Kingdoms
