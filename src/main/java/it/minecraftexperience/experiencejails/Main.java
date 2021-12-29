@@ -24,6 +24,8 @@ public final class Main extends JavaPlugin {
         PluginLogger.log("INFO", "Made by tommaso.benatti#0001 : Sodio#2005");
         PluginLogger.log("INFO", "Plugin successfully loaded!");
 
+        // config
+        saveDefaultConfig();
     }
 
     @Override
