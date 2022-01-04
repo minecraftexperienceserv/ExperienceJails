@@ -5,3 +5,7 @@ api-version: 1.17
 authors: [ tommasobenatti, IllegalNatrium ]
 description: A simple plugin for Jails, made for Kingdoms
 website: www.mcexp.it
+
+commands:
+  jail:
+    description: Core Command

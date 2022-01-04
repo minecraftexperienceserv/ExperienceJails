@@ -2,34 +2,39 @@ package it.minecraftexperience.experiencejails.utils;
 
 public class PluginLogger {
 
-    private static String prefix = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m |  \033[0m";
-    private static String prefix_INFO = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;36m[INFO] \033[0m";
-    private static String prefix_SUCCESS = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;32m[SUCCESS] \033[0m";
-    private static String prefix_WARNING = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;33m[WARNING] \033[0m";
-    private static String prefix_ERROR = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;31m[ERROR] \033[0m";
+    private static final String prefix = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m |  \033[0m";
+    private static final String prefix_INFO = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;36m[INFO] \033[0m";
+    private static final String prefix_SUCCESS = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;32m[SUCCESS] \033[0m";
+    private static final String prefix_WARNING = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;33m[WARNING] \033[0m";
+    private static final String prefix_ERROR = "\033[1;96m| \033[1;31mExperienceJails\033[1;96m | \033[1;31m[ERROR] \033[0m";
 
     public static void log(String level, String message) {
         switch (level.toUpperCase()) {
-            case "INFO":
+            case "INFO" -> {
                 System.out.print(prefix_INFO + message + "\n");
                 return;
-            case "SUCCESS":
+            }
+            case "SUCCESS" -> {
                 System.out.print(prefix_SUCCESS + message + "\n");
                 return;
-            case "WARNING":
+            }
+            case "WARNING" -> {
                 System.out.print(prefix_WARNING + message + "\n");
                 return;
-            case "ERROR":
+            }
+            case "ERROR" -> {
                 System.out.print(prefix_ERROR + message + "\n");
                 return;
-            case "DISABLE":
+            }
+            case "DISABLE" -> {
                 System.out.print(message + "\n");
                 return;
+            }
         }
         System.out.print(prefix + message + "\n");
     }
 
-    private class ConsoleColors {
+    private static class ConsoleColors {
         public static final String RESET = "\033[0m";
 
         public static final String BLACK = "\033[0;30m";

@@ -24,5 +24,37 @@
 # >>> Permissions <<<
 #
 # experiencejails.help
+# experiencejails.create
 #
 ################################
+
+# >>> Database <<<
+  # Models
+    # Jailed player example
+      # Nickname | join date | leave date | jail name | reason | staffer
+    # Created jails example
+      # jail name | x | y | z | world
+# Database Credentials
+ADDRESS: "localhost"
+USERNAME: "root"
+PASSWORD: "root"
+DATABASE: "exp_jails"
+PORT: "3306"
+#
+#
+################################
+
+################################
+# >>> Messages <<<
+
+defaultMessages:
+  denied: "&cYou have no permission to do that!"
+  onlyPlayer: "&cOnly player!"
+  pluginException: "&cPlugin has thrown a Exception, contact Server Administrator!"
+  noJail: "&cThere's no jail with that name!"
+  noArgs: "&cNo arguments valid."
+  jailCreated: "&dJail {0} created successfully."
+  exceptionError: "&cThere was a exception, please retry later."
+  configReloaded: "&cConfig Reloaded."
+  alreadyCreated: "&cJail was already created!\nCheck jail lists."
+  jailDeleted: "&cJail {0} has been deleted"
