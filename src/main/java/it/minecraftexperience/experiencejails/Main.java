@@ -1,15 +1,17 @@
 package it.minecraftexperience.experiencejails;
 
+import it.minecraftexperience.experiencejails.commands.managers.CoreManager;
+import it.minecraftexperience.experiencejails.storage.SQLInitializer;
+import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
+    SQLInitializer initializer = new SQLInitializer(this);
+
     @Override
     public void onEnable() {
         saveDefaultConfig();
-
-
-
         getLogger().info("""
 
 
@@ -28,11 +30,24 @@ public final class Main extends JavaPlugin {
         getLogger().info("Jails plugin for MinecraftExperience | Kingdoms");
         getLogger().info("Made by tommaso.benatti#0001 : Sodio#2005");
         getLogger().info("Plugin successfully loaded!");
+        initializeClasses();
+
+        getCommand("jcore").setExecutor(new CoreManager(this,initializer));
+
     }
 
+    @SneakyThrows
+    private void initializeClasses() {
+        initializer.run();
+
+    }
+
+    @SneakyThrows
     @Override
     public void onDisable() {
-
+        if(initializer.getConnection() != null) {
+            initializer.getConnection().close();
+        }
     }
 
 }

@@ -7,5 +7,5 @@ description: A simple plugin for Jails, made for Kingdoms
 website: www.mcexp.it
 
 commands:
-  jail:
-    description: Core Command
+  jcore:
+    description: ".."
