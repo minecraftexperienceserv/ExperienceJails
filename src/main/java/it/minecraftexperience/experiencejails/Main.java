@@ -1,26 +1,16 @@
 package it.minecraftexperience.experiencejails;
 
-import it.minecraftexperience.experiencejails.commands.JailHandler;
-import it.minecraftexperience.experiencejails.commands.tabCompleters.CoreTabCompleter;
-import it.minecraftexperience.experiencejails.database.DatabaseFactory;
-import it.minecraftexperience.experiencejails.listeners.PlayerJoinEvent;
-import it.minecraftexperience.experiencejails.modules.Jail;
-import it.minecraftexperience.experiencejails.utils.GlobalVariables;
-import it.minecraftexperience.experiencejails.utils.PluginLogger;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.sql.SQLException;
-
-import static it.minecraftexperience.experiencejails.database.DatabaseStorage.initializeJailedPlayers;
-import static it.minecraftexperience.experiencejails.database.DatabaseStorage.initializeJails;
 
 public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Logging
-        PluginLogger.log("DISABLED", """
+        saveDefaultConfig();
+
+
+
+        getLogger().info("""
 
 
                   ______                      _                          _       _ _    \s
@@ -34,41 +24,15 @@ public final class Main extends JavaPlugin {
 
                 """
         );
-        PluginLogger.log("INFO", "Plugin version: v" + this.getDescription().getVersion());
-        PluginLogger.log("INFO", "Jails plugin for MinecraftExperience | Kingdoms");
-        PluginLogger.log("INFO", "Made by tommaso.benatti#0001 : Sodio#2005");
-        PluginLogger.log("INFO", "Plugin successfully loaded!");
-
-        // Config
-        saveDefaultConfig();
-
-        initializeIMClasses(this);
-
-        // Commands
-        this.getCommand("jail").setExecutor(new JailHandler(this));
-        // Tabs
-        this.getCommand("jail").setTabCompleter(new CoreTabCompleter(this));
-
-        this.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(),this);
-    }
-
-    public void initializeIMClasses(Plugin plugin) {
-        new DatabaseFactory(plugin);
-        new GlobalVariables(plugin);
-        try {
-            initializeJails();
-            initializeJailedPlayers();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getLogger().info("Plugin version: v" + this.getDescription().getVersion());
+        getLogger().info("Jails plugin for MinecraftExperience | Kingdoms");
+        getLogger().info("Made by tommaso.benatti#0001 : Sodio#2005");
+        getLogger().info("Plugin successfully loaded!");
     }
 
     @Override
     public void onDisable() {
-        try {
-            DatabaseFactory.getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
+
 }
