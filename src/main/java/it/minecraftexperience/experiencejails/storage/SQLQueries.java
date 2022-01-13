@@ -14,5 +14,6 @@ public class SQLQueries {
 
     // Insertion Operators
     private String INSERT_JAIL = "INSERT INTO JAILS VALUES (?,?,?,?,?,?,?);";
+    private String INSERT_JAILED = "INSERT INTO JAILED VALUES (?,?,?,?,?,?)'";
 
 }

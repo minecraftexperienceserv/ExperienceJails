@@ -12,28 +12,26 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.UUID;
 
-public class PlayerTableAutomaton extends Thread {
+public class PlayerTableAutomaton {
 
     public PlayerTableAutomaton(Plugin pl, Connection connection) {
-        super(() -> {
-            try (Statement statement = connection.createStatement()) {
-                ResultSet query = statement.executeQuery("SELECT * FROM JAILED;");
-                while(query.next()) {
-                    PlayerObjectInterface i = new PlayerObjectInterface();
-                    JailObjectInterface iJ = new JailObjectInterface();
-                    iJ.setJail(query.getString("jail"));
-                    i.setJail(iJ);
-                    i.setReason(query.getString("reason"));
-                    i.setTargetUuid(UUID.nameUUIDFromBytes(query.getString("target").getBytes()));
-                    i.setStaffObjectUuid(UUID.nameUUIDFromBytes(query.getString("staffer").getBytes()));
-                    i.setStart(new Date(query.getLong("start")));
-                    i.setFinish(new Date(query.getLong("finish")));
-                    PlayerObjectVariables.add(i);
-                }
-            } catch (SQLException e) {
-                pl.getLogger().severe(e.getLocalizedMessage());
+        try (Statement statement = connection.createStatement()) {
+            ResultSet query = statement.executeQuery("SELECT * FROM JAILED;");
+            while(query.next()) {
+                PlayerObjectInterface i = new PlayerObjectInterface();
+                JailObjectInterface iJ = new JailObjectInterface();
+                iJ.setJail(query.getString("jail"));
+                i.setJail(iJ);
+                i.setReason(query.getString("reason"));
+                i.setTargetUuid(UUID.nameUUIDFromBytes(query.getString("target").getBytes()));
+                i.setStaffObjectUuid(UUID.nameUUIDFromBytes(query.getString("staffer").getBytes()));
+                i.setStart(new Date(query.getLong("start")));
+                i.setFinish(new Date(query.getLong("finish")));
+                PlayerObjectVariables.add(i);
             }
-        });
+        } catch (SQLException e) {
+            pl.getLogger().severe(e.getLocalizedMessage());
+        }
     }
 
 }

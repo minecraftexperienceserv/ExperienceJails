@@ -6,6 +6,14 @@ authors: [ tommasobenatti, IllegalNatrium ]
 description: A simple plugin for Jails, made for Kingdoms
 website: www.mcexp.it
 
+permissions:
+  experiencejails.jail:
+    description: "Useful for jailing players"
+  experiencejails.create:
+    description: "Useful for creating jails"
+  experiencejails.teleport:
+    description: "Useful for teleporting to jails"
+
 commands:
   jcore:
-    description: ".."
+    description: "Core Command"

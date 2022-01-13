@@ -11,34 +11,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class JailsTableAutomaton extends Thread {
+public class JailsTableAutomaton  {
 
     public JailsTableAutomaton(Plugin pl, Connection connection) {
-        super(() -> {
-            try (Statement statement = connection.createStatement()) {
-                ResultSet query = statement.executeQuery("SELECT * FROM JAILS;");
-                while(query.next()) {
-                    JailObjectInterface i = new JailObjectInterface();
-                    i.setJail(query.getString("jail"));
-                    World world = pl.getServer().getWorld(query.getString("world"));
-                    if(world == null) {
-                        pl.getLogger().severe(String.format("%s does not exist",query.getString("world")));
-                        return;
-                    }
-                    double x = query.getDouble("x");
-                    double y = query.getDouble("y");
-                    double z = query.getDouble("z");
-                    float yaw = (float) query.getDouble("yaw");
-                    float pitch = (float) query.getDouble("pitch");
-                    Location location = new Location(world,x,y,z,yaw,pitch);
-                    i.setLocation(location);
-                    i.setWorld(world);
-                    JailObjectVariables.add(i);
+        try (Statement statement = connection.createStatement()) {
+            ResultSet query = statement.executeQuery("SELECT * FROM JAILS;");
+            while(query.next()) {
+                JailObjectInterface i = new JailObjectInterface();
+                i.setJail(query.getString("jail"));
+                World world = pl.getServer().getWorld(query.getString("world"));
+                if(world == null) {
+                    pl.getLogger().severe(String.format("%s does not exist",query.getString("world")));
+                    return;
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                double x = query.getDouble("x");
+                double y = query.getDouble("y");
+                double z = query.getDouble("z");
+                float yaw = (float) query.getDouble("yaw");
+                float pitch = (float) query.getDouble("pitch");
+                Location location = new Location(world,x,y,z,yaw,pitch);
+                i.setLocation(location);
+                i.setWorld(world);
+                JailObjectVariables.add(i);
             }
-        }, JailsTableAutomaton.class.getSimpleName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

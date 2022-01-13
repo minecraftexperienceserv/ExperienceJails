@@ -24,10 +24,9 @@ public class SQLInitializer {
             String USERNAME = get("USERNAME");
             String PASSWORD = get("PASSWORD");
             connection = DriverManager.getConnection(HOST,USERNAME,PASSWORD);
-            connection.createStatement().execute("USE " + get("DATABASE"));
-            new SQLAutomaton(plugin,connection).start();
-            new JailsTableAutomaton(plugin,connection).start();
-            new PlayerTableAutomaton(plugin,connection).start();
+            new SQLAutomaton(plugin,connection);
+            new JailsTableAutomaton(plugin,connection);
+            new PlayerTableAutomaton(plugin,connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }

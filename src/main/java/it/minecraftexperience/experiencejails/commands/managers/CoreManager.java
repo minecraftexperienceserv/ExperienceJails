@@ -3,6 +3,7 @@ package it.minecraftexperience.experiencejails.commands.managers;
 import it.minecraftexperience.experiencejails.commands.ListCommand;
 import it.minecraftexperience.experiencejails.commands.jailmanagement.JailCreate;
 import it.minecraftexperience.experiencejails.commands.jailmanagement.JailTeleport;
+import it.minecraftexperience.experiencejails.commands.player.JailPlayer;
 import it.minecraftexperience.experiencejails.storage.SQLInitializer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,6 +31,7 @@ public class CoreManager implements CommandExecutor {
         createCommand(new ListCommand());
         createCommand(new JailTeleport());
         createCommand(new JailCreate());
+        createCommand(new JailPlayer());
     }
 
 

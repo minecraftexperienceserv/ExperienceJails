@@ -7,21 +7,12 @@ import org.bukkit.plugin.Plugin;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class SQLAutomaton extends Thread {
+public class SQLAutomaton {
 
-    private Plugin plugin;
-    private final Connection connection;
-
-    public SQLAutomaton(Plugin l, Connection conn) {
-        this.plugin = l;
-        this.connection = conn;
-    }
-
-    @Override
-    public void run() {
+    public SQLAutomaton(Plugin l, Connection connection) {
         try {
             SQLQueries data = new SQLQueries();
-            Configuration config = plugin.getConfig();
+            Configuration config = l.getConfig();
             // Database Creation
             connection.createStatement()
                     .execute(data.getCREATE_DATABASE().replace("?",config.getString("DATABASE")));
@@ -32,8 +23,7 @@ public class SQLAutomaton extends Thread {
             connection.createStatement()
                     .execute(data.getCREATE_JAILED_TABLE());
         } catch (SQLException e) {
-            plugin.getLogger().severe(e.getLocalizedMessage());
+            l.getLogger().severe(e.getLocalizedMessage());
         }
-        super.run();
     }
 }
