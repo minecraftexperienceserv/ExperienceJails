@@ -12,9 +12,9 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.UUID;
 
-public class PlayerTableAutomaton {
+public class PlayersTableInitializer {
 
-    public PlayerTableAutomaton(Plugin pl, Connection connection) {
+    public PlayersTableInitializer(Plugin pl, Connection connection) {
         try (Statement statement = connection.createStatement()) {
             ResultSet query = statement.executeQuery("SELECT * FROM JAILED;");
             while(query.next()) {

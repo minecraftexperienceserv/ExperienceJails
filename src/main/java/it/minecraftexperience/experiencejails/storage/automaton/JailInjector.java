@@ -8,17 +8,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class JailInjectorAutomaton {
+public class JailInjector {
 
     @SneakyThrows
-    public JailInjectorAutomaton(PlayerObjectInterface i, Connection connection) {
+    public JailInjector(PlayerObjectInterface i, Connection connection) {
         try (PreparedStatement s = connection.prepareStatement(new SQLQueries().getINSERT_JAILED())) {
             s.setString(1,i.getJail().getJail());
             s.setString(2,i.getTargetUuid().toString());
             s.setString(3,i.getReason());
             s.setString(4,i.getStaffObjectUuid().toString());
-            s.setString(5,i.getStart().toString());
-            s.setString(6,i.getFinish().toString());
+            s.setLong(5,i.getStart().getTime());
+            s.setLong(6,i.getFinish().getTime());
             s.execute();
         } catch (SQLException e) {
             e.printStackTrace();

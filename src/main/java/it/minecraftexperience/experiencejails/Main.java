@@ -1,6 +1,7 @@
 package it.minecraftexperience.experiencejails;
 
 import it.minecraftexperience.experiencejails.commands.managers.CoreManager;
+import it.minecraftexperience.experiencejails.listeners.PlayerJoinEventJail;
 import it.minecraftexperience.experiencejails.storage.SQLInitializer;
 import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,6 +35,7 @@ public final class Main extends JavaPlugin {
 
         getCommand("jcore").setExecutor(new CoreManager(this,initializer));
 
+        getServer().getPluginManager().registerEvents(new PlayerJoinEventJail(),this);
     }
 
     @SneakyThrows

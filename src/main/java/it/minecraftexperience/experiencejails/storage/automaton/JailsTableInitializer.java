@@ -11,9 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class JailsTableAutomaton  {
+public class JailsTableInitializer {
 
-    public JailsTableAutomaton(Plugin pl, Connection connection) {
+    public JailsTableInitializer(Plugin pl, Connection connection) {
         try (Statement statement = connection.createStatement()) {
             ResultSet query = statement.executeQuery("SELECT * FROM JAILS;");
             while(query.next()) {

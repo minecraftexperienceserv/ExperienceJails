@@ -1,7 +1,7 @@
 package it.minecraftexperience.experiencejails.storage;
 
-import it.minecraftexperience.experiencejails.storage.automaton.JailsTableAutomaton;
-import it.minecraftexperience.experiencejails.storage.automaton.PlayerTableAutomaton;
+import it.minecraftexperience.experiencejails.storage.automaton.JailsTableInitializer;
+import it.minecraftexperience.experiencejails.storage.automaton.PlayersTableInitializer;
 import lombok.SneakyThrows;
 import org.bukkit.plugin.Plugin;
 
@@ -25,8 +25,8 @@ public class SQLInitializer {
             String PASSWORD = get("PASSWORD");
             connection = DriverManager.getConnection(HOST,USERNAME,PASSWORD);
             new SQLAutomaton(plugin,connection);
-            new JailsTableAutomaton(plugin,connection);
-            new PlayerTableAutomaton(plugin,connection);
+            new JailsTableInitializer(plugin,connection);
+            new PlayersTableInitializer(plugin,connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }

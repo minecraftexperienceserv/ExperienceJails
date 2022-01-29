@@ -34,6 +34,11 @@ public class JailCreate extends CoreInterface {
     @Override
     public void execute(Player author, String[] args, Plugin plugin, Configuration configuration, Connection connection) {
         if(args.length > 0) {
+            if(JailObjectVariables.getObjects().stream().anyMatch(f->f.getJail().equals(args[1].toLowerCase()))) {
+                author.sendMessage(ChatColor.translateAlternateColorCodes('&',configuration.getString("defaultMessages.alreadyCreated")));
+                return;
+            }
+
             SQLQueries queries = new SQLQueries();
             JailObjectInterface i = new JailObjectInterface();
             i.setJail(args[1].toLowerCase());
